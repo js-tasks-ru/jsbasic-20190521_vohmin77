@@ -12,6 +12,15 @@ function print (text) {
  * чтобы функция sayHello работала корректно
  */
 function isValid (name) {
+    if (name == "" || name == null || name == undefined || name.length < 4 || name == '0' || name == false) {
+        return false;
+    } else
+    for (let i = 0; i < name.length; i += 1) {
+        if (name[i] == ' ') {
+            return false;
+        }
+    }
+    return true;
 }
 
 function sayHello () {
