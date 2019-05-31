@@ -1,0 +1,9 @@
+{
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "all",
+  "files.autoSave": "afterDelay",
+  "editor.accessibilitySupport": "off",
+  "editor.defaultFormatter": "vscode.configuration-editing",
+  "json.format.enable": false,
+  "javascript.format.enable": false
+}
