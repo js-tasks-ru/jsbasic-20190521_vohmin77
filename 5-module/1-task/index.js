@@ -4,48 +4,40 @@
  * Метод устанавливает необходимые по условию аттрибуты таблице
  * @param {Element} table
  */
-function highlight(table) {
-    const actions = {
-        3: (root, td) => {
+function highlight ( table )
+{
 
-            if (td.dataset.available === 'true') {
-                root.classList.toggle('available', true);
-            } else if (td.dataset.available === 'false') {
-                root.classList.toggle('unavailable', true);
-            } else if (!td.hasAttribute('data-available')) {
-                root.hidden = true;
-            }
-
-        },
-        2: (root, td) => {
-
-            if (td.textContent === 'm') {
-                root.classList.toggle('male', true);
-            } else if (td.textContent === 'f') {
-                root.classList.toggle('female', true);
-            }
-        },
-        1: (root, td) => {
-            let age = parseInt(td.textContent, 10);
-
-            if (age < 18) {
-                root.style.textDecoration = 'line-through';
-            }
-
-        }
-    };
-
-    for (let tr of table.rows) {
-
-        Array.from(tr.cells).forEach((td, index) => {
-            let fn = actions[index];
-
-            if (typeof fn === 'function') {
-                fn(tr, td);
-            }
-
-        });
-
+  let cells = table.querySelectorAll( 'td' );
+  for ( let i = 0; i < cells.length; i += 1 )
+  {
+    if ( cells[ i ].getAttribute( 'data-available' ) === "true" )
+    {
+      cells[ i ].parentElement.classList.add('available' );
+    } else if ( cells[ i ].getAttribute( 'data-available' ) === "false" )
+    {
+      cells[ i ].parentElement.classList.add('unavailable' );
     }
+  }
+  let rowss = table.querySelectorAll( 'tr > td:last-child' );
+  for ( let i = 0; i < rowss.length; i += 1 ) {
+    if ( rowss[ i ].hasAttribute( 'data-available' ) === false ) {
+      rowss[ i ].parentElement.hidden = true;
+    }
+  }
+  let gend = table.querySelectorAll( 'tr > td:nth-child(3n)' );
+  for ( let i = 0; i < gend.length; i += 1 ) {
+    if ( gend[ i ].innerHTML === ( 'm' ) ){
+      gend[ i ].parentElement.classList.add('male');
+    } else if ( gend[ i ].innerHTML === ( 'f' ) ){
+      gend[ i ].parentElement.classList.add('female');
+    }
+  }
+  let age = table.querySelectorAll('tr > td:nth-child(2n)');
+  console.log(age);
+  for ( let i = 0; i < age.length; i += 1 ) {
+    if ( +age[ i ].innerHTML < ( 18 ) ){
+      age[ i ].parentElement.setAttribute('style', "text-decoration: line-through");
+    }
+  }
 
 }
